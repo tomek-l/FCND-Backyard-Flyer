@@ -45,7 +45,7 @@ class BackyardFlyer(Drone):
         return math.sqrt(sumsq)
 
     @staticmethod
-    def calculate_box(size=10, altitude=3):
+    def calculate_box(size=10, altitude=5):
         return [
             [0, 0, altitude],
             [size, 0, altitude],
@@ -90,14 +90,13 @@ class BackyardFlyer(Drone):
         print("arming transition")
 
     def takeoff_transition(self):
-        alt = 3.0
+        alt = 5
         self.target_position[2] = alt
         self.takeoff(alt)
         self.state = States.TAKEOFF_COMPLETE
         print("takeoff transition")
 
     def waypoint_transition(self):
-
         if (
             self.euc_dist(self.local_position, self.target_position) < self.eps
         ):  # if reached waypoint
