@@ -29,7 +29,7 @@ class BackyardFlyer(Drone):
         self.target_position = self.wp_list[0]
         self.state = States.MANUAL
         self.waypoints_completed = False
-        self.eps = 0.5  # m
+        self.eps = 1.0  # m
 
         # initial state
         self.flight_state = States.MANUAL
@@ -97,9 +97,8 @@ class BackyardFlyer(Drone):
         print("takeoff transition")
 
     def waypoint_transition(self):
-        if (
-            self.euc_dist(self.local_position, self.target_position) < self.eps
-        ):  # if reached waypoint
+        if (self.euc_dist(self.local_position, self.target_position) < self.eps):  # if reached waypoint
+
             if self.wp_idx + 1 == len(self.wp_list):  # if reached last waypoint
                 pass  # let landing_transition take care of this
             else:
